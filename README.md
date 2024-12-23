@@ -77,12 +77,16 @@ Se preferir rodar com Docker:
 
 1. Faça um fork do repositório.
 ```bash / zsh / shell
+   MercadinhoApp
    ```
-2. git checkout Main
+2.Branch Main
 ```bash / zsh / shell
+  git checkout main 
    ```
-3. git checkout -b nome-da-nova-branch ex:"(api-METODO(Produto)-LOCAL(Repository))-NUMERO APOS A ULTIMA TASK(TASK-0numero)"
-   
+3. Crie uma Branch a parit da main
+   ```bash / zsh / shell
+  Ex: git checkout -b nome-da-nova-branch ex:"(api-METODO(Produto)-LOCAL(Repository))-NUMERO APOS A ULTIMA TASK(TASK-0numero)"
+   ```
 4. Faça commit das suas mudanças:
    ```bash / zsh / shell
    git commit -m "Criação de clasee para exception personalizadas..."
@@ -97,19 +101,21 @@ Se preferir rodar com Docker:
 
 ```bash / zsh / shell
    ```
-1. git checkout Main (efetue o pull)
+1. Branch Main (efetue o pull)
 
 ```bash / zsh / shell
+   git checkout main
+   git pull
    ```
-2. git checkout -b nome-da-nova-branch com o prefixo FIX seguindo o mesmo nome da branch que esta sendo corrigido o erro ex:" fix(api-produto-controller-getId-TASK-0-ultimo numero da branch criada).
+2. Checkout Branch criada
 
 ```bash / zsh / shell
+ git checkout -b nome-da-nova-branch com o prefixo FIX seguindo o mesmo nome da branch que esta sendo corrigido o erro ex:" fix(api-produto-controller-getId-TASK-0-ultimo numero da branch criada).
    ```
 4. Faça commit das suas mudanças:
 
-   git commit -m "Criação de clasee para exception personalizadas..."
-
 ```bash / zsh / shell
+ git commit -m "Criação de clasee para exception personalizadas..."
    ```
 4. Envie seu branch:
    
