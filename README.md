@@ -85,7 +85,7 @@ Se preferir rodar com Docker:
    ```
 3. Crie uma Branch a parit da main
    ```bash / zsh / shell
-  Ex: git checkout -b nome-da-nova-branch ex:"(api-METODO(Produto)-LOCAL(Repository))-NUMERO APOS A ULTIMA TASK(TASK-0numero)"
+     Ex: git checkout -b nome-da-nova-branch ex:"(api-METODO(Produto)-LOCAL(Repository))-NUMERO APOS A ULTIMA TASK(TASK-0numero)"
    ```
 4. Faça commit das suas mudanças:
    ```bash / zsh / shell
