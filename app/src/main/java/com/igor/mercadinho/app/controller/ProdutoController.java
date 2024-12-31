@@ -43,5 +43,13 @@ public class ProdutoController {
      * criar metodo que retorna uma array list de todos os produtos contendo aquela
      * palavra, ignorando escrita
      */
+    @GetMapping("buscar/produtos")
+    public ResponseEntity<List<Produtos>> buscarProdutoPorString(@RequestParam String ref){
+        List<Produtos> produtos = produtosService.buscarProdutoPorString(ref);
+        if(produtos.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(produtos);
+    }
 
 }
