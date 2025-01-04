@@ -1,5 +1,6 @@
 package com.igor.mercadinho.app.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,17 @@ public class ProdutosService {
                 .orElseThrow(() -> new ProdutoResouceNotFoundException("Produto não encontrado para o ID: " + id));
 
         return produtos;
+    }
+
+     public List<Produtos> buscarProdutoPorString(String referencia){
+        referencia = referencia.toLowerCase();
+        List<Produtos> listaProdutos = produtoRepository.findAll();
+        List<Produtos> filtroProduto = new ArrayList<>();
+        for(Produtos produto : listaProdutos){
+            if(produto.getNome().toLowerCase().contains(referencia) || produto.getDescricao().toLowerCase().contains(referencia)){
+                filtroProduto.add(produto);
+            }
+        }
+        return filtroProduto;
     }
 }
