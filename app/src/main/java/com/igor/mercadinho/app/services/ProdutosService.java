@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.igor.mercadinho.app.exception.ProdutoAlreadyExistsException;
@@ -37,7 +38,7 @@ public class ProdutosService {
         return produtos;
     }
 
-     public List<Produtos> buscarProdutoPorString(String referencia){
+    public List<Produtos> buscarProdutoPorString(String referencia){
         referencia = referencia.toLowerCase();
         List<Produtos> listaProdutos = produtoRepository.findAll();
         List<Produtos> filtroProduto = new ArrayList<>();
@@ -48,4 +49,19 @@ public class ProdutosService {
         }
         return filtroProduto;
     }
+
+    public ResponseEntity<String> deletarProdutoPorIDcomNome(int id, String nomeProduto){
+        Produtos produtos = produtoRepository.findById(id)
+                .orElseThrow(() -> new ProdutoResouceNotFoundException("ID não existe: " + id));
+        if(produtos.getNome().toLowerCase().equals(nomeProduto)){
+            produtoRepository.delete(produtos);
+            return ResponseEntity.ok(null);
+        }
+        else
+        {
+            return ResponseEntity.status(404).body("O nome do produto não existe: " + nomeProduto);
+        }
+        
+    }
+    //orElseThrow(() -> new ProdutoResouceNotFoundException("ID não existe: " + id));
 }
