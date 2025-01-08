@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.igor.mercadinho.app.exception.ProductWithDifferentIdentifier;
 import com.igor.mercadinho.app.exception.ProdutoAlreadyExistsException;
 import com.igor.mercadinho.app.exception.ProdutoNameNotExistsException;
 import com.igor.mercadinho.app.exception.ProdutoNameNotExistsException;
@@ -50,7 +51,6 @@ public class ProdutosService {
         }
         return filtroProduto;
     }
-<<<<<<< HEAD
 
     public Produtos deletarProdutoPorIDcomNome(int id, String nomeProduto){
         Produtos produto = produtoRepository.findById(id)
@@ -63,7 +63,17 @@ public class ProdutosService {
         return produto;
         
     }
-    
-=======
->>>>>>> parent of 2c8a509 (Adicionado funcionalidade de deletar por id com verificação do nome)
+
+    public Produtos alterarProduto(int id, Produtos alteracoes){
+        Produtos produto = produtoRepository.findById(id)
+            .orElseThrow(() -> new ProdutoResouceNotFoundException("ID não existe: " + id));
+        if(!alteracoes.getId().equals(produto.getId())){
+            throw new ProductWithDifferentIdentifier("O ID do produto enviado não corresponde ao ID: " + id);
+        }
+        produto.setNome(alteracoes.getNome());
+        produto.setDescricao(alteracoes.getDescricao());
+        produto.setPreco(alteracoes.getPreco());
+        produto.setQuantidade(alteracoes.getQuantidade());
+        return produtoRepository.save(produto);
+    }
 }

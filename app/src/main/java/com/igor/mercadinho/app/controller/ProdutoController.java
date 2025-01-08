@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.igor.mercadinho.app.exception.ProductWithDifferentIdentifier;
 import com.igor.mercadinho.app.exception.ProdutoNameNotExistsException;
 import com.igor.mercadinho.app.exception.ProdutoResouceNotFoundException;
 import com.igor.mercadinho.app.model.Produtos;
@@ -56,7 +59,6 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
-<<<<<<< HEAD
    
     @DeleteMapping("deletar/{id}")
     public ResponseEntity<Produtos> deletarProdutoPorIDcomNome(@PathVariable int id, String nomeProduto){
@@ -74,6 +76,17 @@ public class ProdutoController {
         
     }
 
-=======
->>>>>>> parent of 2c8a509 (Adicionado funcionalidade de deletar por id com verificação do nome)
+    @PutMapping("alterar/{id}")
+    public ResponseEntity<Produtos> alterarProduto(@PathVariable int id, @RequestBody Produtos alteracoesDoProduto){
+        try{
+            Produtos produto = produtosService.alterarProduto(id, alteracoesDoProduto);
+            return ResponseEntity.ok(produto);
+        }
+        catch(ProdutoResouceNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        catch(ProductWithDifferentIdentifier e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 }
