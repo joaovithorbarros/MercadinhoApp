@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.igor.mercadinho.app.exception.ProdutoAlreadyExistsException;
+import com.igor.mercadinho.app.exception.ProdutoNameNotExistsException;
+import com.igor.mercadinho.app.exception.ProdutoNameNotExistsException;
 import com.igor.mercadinho.app.exception.ProdutoResouceNotFoundException;
 import com.igor.mercadinho.app.model.Produtos;
 import com.igor.mercadinho.app.repository.ProdutoRepository;
@@ -50,18 +52,16 @@ public class ProdutosService {
         return filtroProduto;
     }
 
-    public ResponseEntity<String> deletarProdutoPorIDcomNome(int id, String nomeProduto){
-        Produtos produtos = produtoRepository.findById(id)
+    public Produtos deletarProdutoPorIDcomNome(int id, String nomeProduto){
+        Produtos produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new ProdutoResouceNotFoundException("ID não existe: " + id));
-        if(produtos.getNome().toLowerCase().equals(nomeProduto)){
-            produtoRepository.delete(produtos);
-            return ResponseEntity.ok(null);
-        }
-        else
-        {
-            return ResponseEntity.status(404).body("O nome do produto não existe: " + nomeProduto);
+        if(!produto.getNome().toLowerCase().equals(nomeProduto)){
+            throw new ProdutoNameNotExistsException("O nome do produto não corresponde ao ID fornecido.");
         }
         
+        produtoRepository.delete(produto);
+        return produto;
+        
     }
-    //orElseThrow(() -> new ProdutoResouceNotFoundException("ID não existe: " + id));
+    
 }
