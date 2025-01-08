@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.igor.mercadinho.app.exception.ProdutoAlreadyExistsException;
@@ -40,7 +39,7 @@ public class ProdutosService {
         return produtos;
     }
 
-    public List<Produtos> buscarProdutoPorString(String referencia){
+     public List<Produtos> buscarProdutoPorString(String referencia){
         referencia = referencia.toLowerCase();
         List<Produtos> listaProdutos = produtoRepository.findAll();
         List<Produtos> filtroProduto = new ArrayList<>();
@@ -51,6 +50,7 @@ public class ProdutosService {
         }
         return filtroProduto;
     }
+<<<<<<< HEAD
 
     public Produtos deletarProdutoPorIDcomNome(int id, String nomeProduto){
         Produtos produto = produtoRepository.findById(id)
@@ -64,4 +64,6 @@ public class ProdutosService {
         
     }
     
+=======
+>>>>>>> parent of 2c8a509 (Adicionado funcionalidade de deletar por id com verificação do nome)
 }

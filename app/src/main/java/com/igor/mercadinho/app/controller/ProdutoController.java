@@ -2,12 +2,9 @@ package com.igor.mercadinho.app.controller;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +56,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
+<<<<<<< HEAD
    
     @DeleteMapping("deletar/{id}")
     public ResponseEntity<Produtos> deletarProdutoPorIDcomNome(@PathVariable int id, String nomeProduto){
@@ -76,4 +74,6 @@ public class ProdutoController {
         
     }
 
+=======
+>>>>>>> parent of 2c8a509 (Adicionado funcionalidade de deletar por id com verificação do nome)
 }
