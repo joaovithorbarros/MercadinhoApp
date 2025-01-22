@@ -21,7 +21,6 @@ import com.igor.mercadinho.app.exception.ProdutoResouceNotFoundException;
 import com.igor.mercadinho.app.model.Produtos;
 import com.igor.mercadinho.app.services.ProdutosService;
 
-import ch.qos.logback.core.model.processor.PhaseIndicator;
 
 @RestController
 @RequestMapping("/api/produto")
